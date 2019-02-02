@@ -8,6 +8,15 @@ Before you start you should get the final files from [cpp-qt-ui-cmake](https://g
 
 We will create a window with multiple pages that are shown one at a time, at the full size of the window.
 
+## Using Qt Designer
+
+![](assets/qt-desginer.png)
+
+- On the left you see Widget Box: you can drag the Widgets from the into the Main Window.
+- In the middle the preview of the Main Window.
+- On the right side, the Object Inspector lists all the widgets and layouts in the current Window.
+- In the lower part of the right side, the Property Editor, allows to edit the properties of the Widget currently selected.
+
 ## Adding widgets to the `.ui` file
 
 Open `ui/mainwindow.ui` in Qt Designer.
