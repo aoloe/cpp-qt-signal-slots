@@ -54,3 +54,75 @@ In Designer you will need to use the small arrows in the top right corner of the
 The result should look like this:
 
 ![](assets/qt-designer-page-with-button.png)
+
+You can now `make` your project and you will see the "Details" button of the first page.
+
+If you see the "List" button instead, you will have to go back to the Designer and activate the first page, before saving again the `.ui` file.
+
+## Adding actions to the buttons
+
+The actions are added in the `MainWindow`'s constructor defined in `src/mainwindow.cpp`.
+
+Qt provides a mechanism called "Signal and Slots" that lets you easily react to UI events (at the bases it's an [Observer pattern](https://en.wikipedia.org/wiki/Observer_pattern)).
+
+We are going to connect the `Details` button (`detailsButtonPushed`) to a new function `detailsButtonPushed()`:
+
+```cpp
+connect(ui->detailsPushButton, &QPushButton::clicked,
+    this, &MainWindow::detailsButtonPushed);
+```
+
+With `connect` we define that:
+
+- each time the object `ui->detailsPushButton` triggers signal `clicked`,
+- we call the slot `detailsButtonPushed` in our `MainWindow`.
+
+The signal `clicked` is defined in the class `QPushButton`: `&QPushButton::clicked` means, that we are passing to the `connect()` function a reference to the function `QPushButton::clicked`, which is defined by Qt in the `QPushButton` class.
+
+We now have to create the slot `MainWindow::detailsButtonPushed`:
+
+- Towards the end of `src/mainwindow.h`, add the `detailsButtonPushed` function: 
+
+  ```cpp
+    private slots:
+        void detailsButtonPushed();
+  ```
+
+  `slots` is a macro defined by Qt which will do some magic with the `detailsButtonPushed()` and will prepare it, for adding it to the right side of a `connect()`.
+- In `src/mainwindow.cpp` add the _void_ implementation of `detailsButtonPushed()`:
+
+  ```cpp
+  void MainWindow::detailsButtonPushed()
+  {
+      qDebug() << "pushed";
+  }
+  ```
+
+  `qDebug()` will output in the terminal the message we are piping: you'll need to `#include <QDebug>` for it.
+
+As next we can add the command for switching `QStackedWidget`'s page by replacing the debug output with:
+
+```cpp
+void MainWindow::detailsButtonPushed()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+```
+
+Finally, we connect the second button,  and add the `ctrl-Q` shortcut for exiting our application.  
+In the `MainWindow`'s constructor add the two following `connect`s:
+
+```cpp
+connect(ui->listPushButton, &QPushButton::clicked,
+    this, &MainWindow::listButtonPushed);
+
+auto quitAction = new QAction();
+quitAction->setShortcuts(QKeySequence::Quit);
+addAction(quiitAction);
+connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
+```
+
+Two remarks:
+
+- You will need to define `listButtonPushed`, in the same way you did for `detailsButtonPushed`.
+- Normally, you will attach _Quit_ action to a button or a menu. But we can also simply attach it to the `ctrl-Q` shortcut.
