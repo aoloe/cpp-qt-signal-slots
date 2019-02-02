@@ -77,7 +77,7 @@ With `connect` we define that:
 - each time the object `ui->detailsPushButton` triggers signal `clicked`,
 - we call the slot `detailsButtonPushed` in our `MainWindow`.
 
-The signal `clicked` is defined in the class `QPushButton`: `&QPushButton::clicked` means, that we are passing to the `connect()` function a reference to the function `QPushButton::clicked`, which is defined by Qt in the `QPushButton` class.
+The signal `clicked` is defined in the class `QPushButton`. `&QPushButton::clicked` means, that the second argument of `connect()` is a reference to the function `QPushButton::clicked`, which is defined by Qt in the `QPushButton` class.
 
 We now have to create the slot `MainWindow::detailsButtonPushed`:
 
@@ -89,7 +89,7 @@ We now have to create the slot `MainWindow::detailsButtonPushed`:
   ```
 
   `slots` is a macro defined by Qt which will do some magic with the `detailsButtonPushed()` and will prepare it, for adding it to the right side of a `connect()`.
-- In `src/mainwindow.cpp` add the _void_ implementation of `detailsButtonPushed()`:
+- In `src/mainwindow.cpp` add the _mock_ implementation of `detailsButtonPushed()`:
 
   ```cpp
   void MainWindow::detailsButtonPushed()
@@ -100,6 +100,8 @@ We now have to create the slot `MainWindow::detailsButtonPushed`:
 
   `qDebug()` will output in the terminal the message we are piping: you'll need to `#include <QDebug>` for it.
 
+`make` it and see if it works by clicking on the button and checking the output in the terminal.
+
 As next we can add the command for switching `QStackedWidget`'s page by replacing the debug output with:
 
 ```cpp
@@ -108,6 +110,8 @@ void MainWindow::detailsButtonPushed()
     ui->stackedWidget->setCurrentIndex(1);
 }
 ```
+
+That was simple! `make` and check if it works.
 
 Finally, we connect the second button,  and add the `ctrl-Q` shortcut for exiting our application.  
 In the `MainWindow`'s constructor add the two following `connect`s:
@@ -124,5 +128,5 @@ connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
 
 Two remarks:
 
-- You will need to define `listButtonPushed`, in the same way you did for `detailsButtonPushed`.
+- You will need to define the `listButtonPushed` function, in both the `mainwindow.h` and `mainwindow.cpp` as you did for `detailsButtonPushed`.
 - Normally, you will attach _Quit_ to a menu or a button. We don't have (yet) and Qt allows us to directly attach it to the `ctrl-Q` shortcut.
