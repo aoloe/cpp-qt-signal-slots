@@ -118,11 +118,11 @@ connect(ui->listPushButton, &QPushButton::clicked,
 
 auto quitAction = new QAction();
 quitAction->setShortcuts(QKeySequence::Quit);
-addAction(quiitAction);
+addAction(quitAction);
 connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
 ```
 
 Two remarks:
 
 - You will need to define `listButtonPushed`, in the same way you did for `detailsButtonPushed`.
-- Normally, you will attach _Quit_ action to a button or a menu. But we can also simply attach it to the `ctrl-Q` shortcut.
+- Normally, you will attach _Exit
