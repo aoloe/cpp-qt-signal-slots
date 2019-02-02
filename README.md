@@ -39,7 +39,7 @@ On each page:
 - Add an "Horiztonal Spacer" element at the right of the Button to push it to the left (mind where the blue line is).
 - Add a "Vertical Spacer" element below the "Horizontal layout" to push it to the top.
 
-If you have issue, dropping the widgets, layouts or spacer to the right place, you can drop them into the Object Inspector.
+If you have issues dropping the widgets, layouts or spacer to the right place, you can drop them into the Object Inspector.
 
 In the Property Editor:
 
