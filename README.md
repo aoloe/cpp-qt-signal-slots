@@ -125,4 +125,4 @@ connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
 Two remarks:
 
 - You will need to define `listButtonPushed`, in the same way you did for `detailsButtonPushed`.
-- Normally, you will attach _Exit
+- Normally, you will attach _Quit_ to a menu or a button. We don't have (yet) and Qt allows us to directly attach it to the `ctrl-Q` shortcut.
