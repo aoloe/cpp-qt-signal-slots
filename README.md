@@ -1,4 +1,4 @@
-# Using Signals and Slots and  Cpp, Qt, ui and cmake project
+# Using Signals and Slots
 
 [cpp-qt-ui-cmake](https://github.com/aoloe/cpp-qt-ui-cmake) teaches how to create a sample Qt app that does nothing.
 
