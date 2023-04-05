@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     auto quitAction = new QAction();
     quitAction->setShortcuts(QKeySequence::Quit);
     addAction(quitAction);
-    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
+    connect(quitAction, &QAction::triggered, this, &QMainWindow::close);
 
 }
 
